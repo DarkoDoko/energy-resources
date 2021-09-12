@@ -1,0 +1,12 @@
+applicationId: "device-to-storage-application"
+kafka:
+  bootstrap-servers: "localhost:9092"
+  schema-registry-url: "http://localhost:8090"
+  source: "source-topic"
+  deviceTable: "devices"
+
+database:
+  driverClass: org.postgresql.Driver
+  user: postgres
+  password: secret
+  url: "jdbc:postgresql://0.0.0.0:5432/postgres"
