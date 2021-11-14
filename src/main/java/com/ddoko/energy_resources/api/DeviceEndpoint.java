@@ -1,7 +1,7 @@
 package com.ddoko.energy_resources.api;
 
 import com.ddoko.energy_resources.devices.raw.RawRecord;
-import io.dropwizard.util.ByteStreams;
+import com.google.common.collect.ImmutableMap;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import static io.dropwizard.util.ByteStreams.toByteArray;
@@ -44,7 +46,7 @@ public class DeviceEndpoint {
     @Path("/send/{uuid}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response send(@PathParam("uuid") String uuid, @Context HttpServletRequest request) throws IOException {
+    public Response send(@PathParam("uuid") String uuid, @Context HttpServletRequest request) throws IOException, ExecutionException, InterruptedException {
 
         ByteBuffer body = ByteBuffer.wrap(toByteArray(request.getInputStream()));
         RawRecord payload = new RawRecord(uuid);
@@ -52,6 +54,15 @@ public class DeviceEndpoint {
         ProducerRecord record = new ProducerRecord(topic, uuid, payload);
         Future<RecordMetadata> metadata = producer.send(record);
 
-        return Response.ok().build();
+        return Response.ok().entity(serialize(metadata.get())).build();
+    }
+
+    private Map<String, Object> serialize(RecordMetadata metadata) {
+        return ImmutableMap.<String, Object>builder()
+                .put("offset", metadata.offset())
+                .put("partition", metadata.offset())
+                .put("topic", metadata.topic())
+                .put("timestamp", metadata.timestamp())
+                .build();
     }
 }
