@@ -16,7 +16,7 @@ public class ApiServer extends Application<ApiConfiguration> {
     @Override
     public void run(ApiConfiguration configuration, Environment environment) throws Exception {
 
-        final JdbiFactory factory = new JdbiFactory();
+        final var factory = new JdbiFactory();
         Jdbi jdbi = factory.build(environment, configuration.getDatabase(), "device-db");
 
         KafkaProducer producer = createProducer(configuration);

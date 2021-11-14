@@ -1,7 +1,10 @@
 package com.ddoko.energy_resources.api;
 
+import com.ddoko.energy_resources.devices.raw.RawRecord;
 import io.dropwizard.util.ByteStreams;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
@@ -10,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.concurrent.Future;
 
 import static io.dropwizard.util.ByteStreams.toByteArray;
 
@@ -43,7 +47,10 @@ public class DeviceEndpoint {
     public Response send(@PathParam("uuid") String uuid, @Context HttpServletRequest request) throws IOException {
 
         ByteBuffer body = ByteBuffer.wrap(toByteArray(request.getInputStream()));
+        RawRecord payload = new RawRecord(uuid);
 
+        ProducerRecord record = new ProducerRecord(topic, uuid, payload);
+        Future<RecordMetadata> metadata = producer.send(record);
 
         return Response.ok().build();
     }

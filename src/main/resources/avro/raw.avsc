@@ -1,0 +1,11 @@
+{
+  "namespace": "com.ddoko.energy_resources.devices.raw",
+  "type": "record",
+  "name": "RawRecord",
+  "fields": [
+    {
+      "name": "uuid",
+      "type": "string"
+    }
+  ]
+}
