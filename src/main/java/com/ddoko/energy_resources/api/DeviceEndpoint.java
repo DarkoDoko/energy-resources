@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -49,7 +50,7 @@ public class DeviceEndpoint {
     public Response send(@PathParam("uuid") String uuid, @Context HttpServletRequest request) throws IOException, ExecutionException, InterruptedException {
 
         ByteBuffer body = ByteBuffer.wrap(toByteArray(request.getInputStream()));
-        RawRecord payload = new RawRecord(uuid);
+        RawRecord payload = new RawRecord(uuid, Instant.now().toEpochMilli(), body);
 
         ProducerRecord record = new ProducerRecord(topic, uuid, payload);
         Future<RecordMetadata> metadata = producer.send(record);
