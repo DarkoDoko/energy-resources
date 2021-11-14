@@ -58,6 +58,12 @@ public class DeviceEndpoint {
         return Response.ok().entity(serialize(metadata.get())).build();
     }
 
+    @GET
+    @Path("/state")
+    public Response getStatus(@QueryParam("uuid") String uuid){
+        return Response.ok().entity(db.getDeviceState(table, uuid)).build();
+    }
+
     private Map<String, Object> serialize(RecordMetadata metadata) {
         return ImmutableMap.<String, Object>builder()
                 .put("offset", metadata.offset())
