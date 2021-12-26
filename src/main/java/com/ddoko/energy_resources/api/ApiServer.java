@@ -19,7 +19,7 @@ public class ApiServer extends Application<ApiConfiguration> {
         final var factory = new JdbiFactory();
         Jdbi jdbi = factory.build(environment, configuration.getDatabase(), "device-db");
 
-        KafkaProducer producer = createProducer(configuration);
+        KafkaProducer<String, Object> producer = createProducer(configuration);
         environment.lifecycle().manage(new CloseableManaged(producer));
 
         environment.jersey().register(
@@ -30,7 +30,7 @@ public class ApiServer extends Application<ApiConfiguration> {
         );
     }
 
-    private KafkaProducer createProducer(ApiConfiguration configuration) {
+    private KafkaProducer<String, Object> createProducer(ApiConfiguration configuration) {
         Properties properties = new Properties();
 
         properties.put(ProducerConfig.ACKS_CONFIG, "1");
@@ -38,7 +38,7 @@ public class ApiServer extends Application<ApiConfiguration> {
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
 
         properties.putAll(configuration.getKafka());
-        return new KafkaProducer(properties);
+        return new KafkaProducer<>(properties);
     }
 
     @Override
