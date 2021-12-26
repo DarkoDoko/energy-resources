@@ -23,13 +23,13 @@ import static io.dropwizard.util.ByteStreams.toByteArray;
 @Path("/")
 public class DeviceEndpoint {
 
-    private final KafkaProducer producer;
+    private final KafkaProducer<String, Object> producer;
     private final String topic;
     private final String table;
 
     private final DeviceDAO db;
 
-    public DeviceEndpoint(KafkaProducer producer, String topic, String table, DeviceDAO db) {
+    public DeviceEndpoint(KafkaProducer<String, Object> producer, String topic, String table, DeviceDAO db) {
         this.producer = producer;
         this.topic = topic;
         this.table = table;
@@ -52,8 +52,8 @@ public class DeviceEndpoint {
         ByteBuffer body = ByteBuffer.wrap(toByteArray(request.getInputStream()));
         RawRecord payload = new RawRecord(uuid, Instant.now().toEpochMilli(), body);
 
-        ProducerRecord record = new ProducerRecord(topic, uuid, payload);
-        Future<RecordMetadata> metadata = producer.send(record);
+        ProducerRecord<String, Object> kafkaRecord = new ProducerRecord<>(topic, uuid, payload);
+        Future<RecordMetadata> metadata = producer.send(kafkaRecord);
 
         return Response.ok().entity(serialize(metadata.get())).build();
     }
@@ -67,7 +67,7 @@ public class DeviceEndpoint {
     private Map<String, Object> serialize(RecordMetadata metadata) {
         return ImmutableMap.<String, Object>builder()
                 .put("offset", metadata.offset())
-                .put("partition", metadata.offset())
+                .put("partition", metadata.partition())
                 .put("topic", metadata.topic())
                 .put("timestamp", metadata.timestamp())
                 .build();
