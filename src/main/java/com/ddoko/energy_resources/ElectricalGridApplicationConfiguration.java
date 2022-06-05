@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EnergyResourcesApplicationConfiguration extends Configuration {
+public class ElectricalGridApplicationConfiguration extends Configuration {
 
     private String deviceTable;
 

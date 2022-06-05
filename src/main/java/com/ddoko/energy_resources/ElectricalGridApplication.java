@@ -1,11 +1,11 @@
 package com.ddoko.energy_resources;
 
-import com.ddoko.energy_resources.api.CloseableManaged;
 import com.ddoko.energy_resources.api.DeviceDAO;
 import com.ddoko.energy_resources.api.DeviceEndpoint;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.dropwizard.Application;
 import io.dropwizard.jdbi3.JdbiFactory;
+import io.dropwizard.lifecycle.Managed;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -15,15 +15,20 @@ import org.jdbi.v3.core.Jdbi;
 
 import java.util.Properties;
 
-public class EnergyResourcesApplication extends Application<EnergyResourcesApplicationConfiguration> {
+public class ElectricalGridApplication extends Application<ElectricalGridApplicationConfiguration> {
     @Override
-    public void run(EnergyResourcesApplicationConfiguration configuration, Environment environment) throws Exception {
+    public void run(ElectricalGridApplicationConfiguration configuration, Environment environment) throws Exception {
 
         final var factory = new JdbiFactory();
         Jdbi jdbi = factory.build(environment, configuration.getDatabase(), "device-db");
 
         KafkaProducer<String, Object> producer = createProducer(configuration);
-        environment.lifecycle().manage(new CloseableManaged(producer));
+        environment.lifecycle().manage(new Managed() {
+            @Override
+            public void stop() {
+                producer.close();
+            }
+        });
 
         environment.jersey().register(
                 new DeviceEndpoint(
@@ -33,7 +38,7 @@ public class EnergyResourcesApplication extends Application<EnergyResourcesAppli
         );
     }
 
-    private KafkaProducer<String, Object> createProducer(EnergyResourcesApplicationConfiguration configuration) {
+    private KafkaProducer<String, Object> createProducer(ElectricalGridApplicationConfiguration configuration) {
         Properties properties = new Properties();
 
         properties.put(ProducerConfig.ACKS_CONFIG, "1");
@@ -45,12 +50,12 @@ public class EnergyResourcesApplication extends Application<EnergyResourcesAppli
     }
 
     @Override
-    public void initialize(Bootstrap<EnergyResourcesApplicationConfiguration> bootstrap) {
+    public void initialize(Bootstrap<ElectricalGridApplicationConfiguration> bootstrap) {
         super.initialize(bootstrap);
     }
 
     public static void main(String[] args) throws Exception {
-        new EnergyResourcesApplication().run(args);
+        new ElectricalGridApplication().run(args);
     }
 
 }

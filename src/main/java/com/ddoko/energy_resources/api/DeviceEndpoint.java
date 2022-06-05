@@ -49,7 +49,7 @@ public class DeviceEndpoint {
     @Produces({MediaType.APPLICATION_JSON})
     public Response send(@PathParam("uuid") String uuid, @Context HttpServletRequest request) throws IOException, ExecutionException, InterruptedException {
 
-        ByteBuffer body = ByteBuffer.wrap(toByteArray(request.getInputStream()));
+        ByteBuffer body = ByteBuffer.wrap(request.getInputStream().readAllBytes());
         RawRecord payload = new RawRecord(uuid, Instant.now().toEpochMilli(), body);
 
         ProducerRecord<String, Object> kafkaRecord = new ProducerRecord<>(topic, uuid, payload);
