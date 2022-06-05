@@ -1,4 +1,4 @@
-package com.ddoko.energy_resources.api;
+package com.ddoko.energy_resources;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApiConfiguration extends Configuration {
+public class EnergyResourcesApplicationConfiguration extends Configuration {
 
     private String deviceTable;
 
