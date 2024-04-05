@@ -3,9 +3,8 @@ package com.ddoko.energy_resources;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,6 @@ public class ElectricalGridApplicationConfiguration extends Configuration {
     @NotNull
     private String topic;
 
-    @Valid
     @NotNull
     private DataSourceFactory database = new DataSourceFactory();
 
