@@ -29,12 +29,12 @@
     <build.helper.plugin.version>3.5.0</build.helper.plugin.version>
 
     <dropwizard.version>4.0.7</dropwizard.version>
-    <jdbi.version>3.28.0</jdbi.version>
-    <kafka.version>3.1.0</kafka.version>
-    <avro.version>1.11.0</avro.version>
-    <confluent.version>6.1.1</confluent.version>
-    <commons.io.version>2.11.0</commons.io.version>
-    <aws.sdk.version>1.12.100</aws.sdk.version>
+    <jdbi.version>3.45.1</jdbi.version>
+    <kafka.version>3.7.0</kafka.version>
+    <avro.version>1.11.3</avro.version>
+    <confluent.version>7.6.0</confluent.version>
+    <commons.io.version>2.16.0</commons.io.version>
+    <aws.sdk.version>1.12.694</aws.sdk.version>
   </properties>
 
   <build>
@@ -88,7 +88,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
+        <version>3.5.2</version>
         <configuration>
           <filters>
             <filter>
@@ -182,20 +182,20 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.3.1</version>
+      <version>42.7.3</version>
     </dependency>
 
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.8.2</version>
+      <version>5.10.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>30.1.1-jre</version>
+      <version>33.1.0-jre</version>
     </dependency>
 
     <!-- Kafka for Junit Tests -->
