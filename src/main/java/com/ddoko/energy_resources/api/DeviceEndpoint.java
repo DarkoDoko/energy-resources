@@ -18,8 +18,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import static io.dropwizard.util.ByteStreams.toByteArray;
-
 @Path("/")
 public class DeviceEndpoint {
 
