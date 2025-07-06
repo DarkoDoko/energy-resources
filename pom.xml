@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- Maybe you want to use your own groupId here, maybe not. Your call.-->
   <groupId>com.ddoko</groupId>
   <artifactId>energy-resources</artifactId>
   <version>1.0-SNAPSHOT</version>
@@ -183,7 +182,7 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.7.3</version>
+      <version>42.7.7</version>
     </dependency>
 
     <!-- Testing -->

@@ -46,7 +46,7 @@ jobs:
           SCHEMA_REGISTRY_HOST_NAME: schema-registry
           SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
       postgres:
-        image: postgres:12.2
+        image: postgres:17.5
         ports:
           - 5432:5432
         env:

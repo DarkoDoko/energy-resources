@@ -4,23 +4,6 @@ Hopefully this scaffold will help you get quickly up and running to build you st
 applications.
 
 ## Getting started
-
-This template should help you get started quickly with this Manning LiveProject. It is designed
-to support Java 8 or Scala 12. It builds code using [Maven 3.x](http://maven.apache.org). 
-
-Your application code can be written under `src/main/[java|scala]` (depending on the language you
- are choosing). Similarly test code lives under `src/test/[java|scala]` 
- 
-Some quick maven commands:
-
- * print maven version `mvn -version`
- * compile: `mvn compile`
- * cleaning up: `mvn clean` 
- * building the final jar: `mvn jar`
-   ** Creates a ar file in the `target/` directory, which can then be run.
-   ** Ex: `java -cp target/myproject-1.0-SNAPSHOT.jar com.manning.MyApplication`
- * run tests: `mvn test` 
-
  
 You will be asked to create [Avro](http://avro.apache.org) schemas, those can be added under `src
 /main/resources/avro` and will automatically generate the Java implementations of the Avro
@@ -35,16 +18,6 @@ $ mvn clean generate-sources
 
 All test classes must end in `Test` for both Scala and Java. For example, `ExampleJavaTest` will
  run, but `ExampleTestJava` will not be found by maven as a test class to execute. 
-
-### Using Scala
-
-Java is the easiest language to use to complete the class, but theoretically any JVM language
-should be feasible. In particular, Kafka does have a specific guide to using Scala with 
-Kafka-Streams:
- https://kafka.apache.org/20/documentation/streams/developer-guide/dsl-api.html#scala-dsl
-
-You _should_ have all the resources you need to build and run the Scala components, but you find
- you are missing anything a patch would be warmly welcomed!
 
 ## Local Kafka & Confluent Schema Registry
 
@@ -65,7 +38,7 @@ When the producer attempts to send data to the broker, it will be automatically 
 Based on the image at https://hub.docker.com/_/postgres
 
 ```bash
-$ docker run --name manning-postgres -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:12.2
+$ docker run --name manning-postgres -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:17.5
 ```
 
 Run the latest (as of writing) available Postgres container, named `manning-postgres`, where the
