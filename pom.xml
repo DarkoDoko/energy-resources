@@ -30,9 +30,9 @@
 
     <dropwizard.version>4.0.7</dropwizard.version>
     <jdbi.version>3.45.1</jdbi.version>
-    <kafka.version>3.7.0</kafka.version>
+    <kafka.version>4.0.0</kafka.version>
     <avro.version>1.11.3</avro.version>
-    <confluent.version>7.6.0</confluent.version>
+    <confluent.version>8.0.0</confluent.version>
     <commons.io.version>2.16.0</commons.io.version>
     <aws.sdk.version>1.12.694</aws.sdk.version>
   </properties>
