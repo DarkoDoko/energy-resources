@@ -28,13 +28,13 @@
     <build.helper.plugin.version>3.6.1</build.helper.plugin.version>
     <maven.shade.plugin.version>3.6.0</maven.shade.plugin.version>
 
-    <dropwizard.version>4.0.7</dropwizard.version>
-    <jdbi.version>3.45.1</jdbi.version>
+    <dropwizard.version>4.0.14</dropwizard.version>
+    <jdbi.version>3.49.5</jdbi.version>
     <kafka.version>4.0.0</kafka.version>
-    <avro.version>1.11.3</avro.version>
+    <avro.version>1.12.0</avro.version>
     <confluent.version>8.0.0</confluent.version>
-    <commons.io.version>2.16.0</commons.io.version>
-    <aws.sdk.version>1.12.694</aws.sdk.version>
+    <commons.io.version>2.19.0</commons.io.version>
+    <aws.sdk.version>2.31.77</aws.sdk.version>
   </properties>
 
   <build>
@@ -173,8 +173,8 @@
       <version>${confluent.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-java-sdk-s3</artifactId>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>s3</artifactId>
       <version>${aws.sdk.version}</version>
     </dependency>
     <!-- Databases drivers -->
