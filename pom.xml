@@ -25,8 +25,9 @@
     <maven.compiler.target>24</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
-    <build.helper.plugin.version>3.5.0</build.helper.plugin.version>
+    <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+    <build.helper.plugin.version>3.6.1</build.helper.plugin.version>
+    <maven.shade.plugin.version>3.6.0</maven.shade.plugin.version>
 
     <dropwizard.version>4.0.7</dropwizard.version>
     <jdbi.version>3.45.1</jdbi.version>
@@ -88,7 +89,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.5.2</version>
+        <version>${maven.shade.plugin.version}</version>
         <configuration>
           <filters>
             <filter>
@@ -197,14 +198,5 @@
       <artifactId>guava</artifactId>
       <version>33.1.0-jre</version>
     </dependency>
-
-    <!-- Kafka for Junit Tests -->
-    <!-- use: https://github.com/salesforce/kafka-junit/tree/master/kafka-junit4#kafkatestserver -->
-<!--    <dependency>-->
-<!--      <groupId>com.salesforce.kafka.test</groupId>-->
-<!--      <artifactId>kafka-junit4</artifactId>-->
-<!--      <version>3.2.1</version>-->
-<!--      <scope>test</scope>-->
-<!--    </dependency>-->
   </dependencies>
 </project>
